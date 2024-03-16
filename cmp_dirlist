@@ -1,0 +1,32 @@
+import os
+
+def collect_subdir_name(datalist,path):
+	for tmp_dir in os.listdir(path):
+		str_tmp_dir=str(tmp_dir)
+		if len(str_tmp_dir)!=9: # 末尾有字母则去除
+			str_tmp_dir=str_tmp_dir[:9]
+		if str_tmp_dir not in datalist:
+			datalist.append(str_tmp_dir)
+	return datalist
+	
+def cmp_datalists(datalist1,datalist2):
+	# datalist1:dataname1_data
+	# datalist2:dataname2_data
+	cmplist1=list(set(datalist2) - set(datalist1))   # 使用  "-"  运算求a与b的差(补)集： 求b中有而a中没有的元素
+	cmplist2=list(set(datalist1) - set(datalist2))   # 使用  "-"  运算求a与b的差(补)集： 求a中有而b中没有的元素
+	print(f"dataname2_data中有,而dataname1_data中没有的元素为:{cmplist1}")
+	print(f"dataname1_data中有,而dataname2_data中没有的元素为:{cmplist2}")
+
+if __name__=="__main__":
+	dataname1_data_path="./dataname1_path/"
+	dataname2_data_path="./dataname2_path/"
+	dataname1_data=[]
+	dataname2_data=[]
+	for i in range(25): # i from 0 to 24
+		new_dataname2_path=dataname2_data_path+str(i)
+		dataname2_data=collect_subdir_name(dataname2_data,new_dataname2_path)
+		if i==24:
+			last_dataname2_path=dataname2_data_path+"tmp"
+			dataname2_data=collect_subdir_name(dataname2_data,last_dataname2_path)
+	dataname1_data=collect_subdir_name(dataname1_data,dataname1_data_path)
+	cmp_datalists(dataname1_data,dataname2_data)
