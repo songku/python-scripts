@@ -1,6 +1,14 @@
-
 import pandas as pd
 import sys
+
+"""
+在读取 CSV 文件的过程中，Pandas 会尝试根据数据的内容来推断每列的数据类型，并可能根据这些推断进行一些格式化。这可能导致读取后的数据与原始 CSV 文件中的数据在格式上有所差异。
+可使用dtype_dict来将数据完整的设置为对应的格式。
+import pandas as pd  
+dtype_dict = {'column1': str, 'column2': str, 'column3': str}  
+df = pd.read_csv('your_file.csv', dtype=dtype_dict)
+"""
+
 if __name__=="__main__":
         if len(sys.argv)!=3:
                 print("usage:python extract_csv_n_lines.py target.csv number/num1-num2")
