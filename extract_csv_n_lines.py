@@ -7,6 +7,15 @@ import sys
 import pandas as pd  
 dtype_dict = {'column1': str, 'column2': str, 'column3': str}  
 df = pd.read_csv('your_file.csv', dtype=dtype_dict)
+如上代码测试失败建议直接sklearn的train_test_split划分
+
+from sklearn.model_selection import train_test_split
+import pandas as pd
+#split the data into train and test set
+train,test = train_test_split(pd.read_csv("./sard_all_out.csv"), test_size=0.20, random_state=0)
+#save the data
+train.to_csv('./train.csv',index=False)
+test.to_csv('./test.csv',index=False)
 """
 
 if __name__=="__main__":
